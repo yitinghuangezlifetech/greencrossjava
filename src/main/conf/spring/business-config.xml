@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"  xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<!-- 使用資源 -->
+	<context:property-placeholder location="classpath:spring/*.properties" system-properties-mode="OVERRIDE" ignore-unresolvable="true" />
+    	
+   	<!-- 掃描所有需要用到的元件 -->
+   	<context:component-scan base-package="tw.com.ezlifetech.ezReco"/>
+	
+	<!-- 資料庫連線資訊 -->
+	<import resource="datasource-config.xml" />
+	
+	
+
+	<!-- enables scanning for @Transactional annotations -->
+	<tx:annotation-driven />
+	
+	<!-- 自動注入相關標記的物料@Component，@Controller，@Service，@Repository -->
+	<mvc:annotation-driven />
+	
+	<!-- aop -->
+	<aop:aspectj-autoproxy />
+	
+	<!-- 自動注入設定檔 
+	<util:properties id="config" location="classpath:config/config.properties" />
+	-->
+	<!-- 網路可以存取的目錄 -->
+	<mvc:resources mapping="/**" location="/" />
+	
+	<!-- 登入安全檢查 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="tw.com.ezlifetech.ezReco.interceptor.SecurityInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- i18n
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="Messages" /> -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="Messages"/>
+	</bean>
+	<bean id="alertSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="Alerts"/>
+	</bean>
+	<bean id="exceptionSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="Exceptions"/>
+	</bean>
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang" />
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    	<property name="interceptors" ref="localeChangeInterceptor"/>
+	</bean>
+	
+	<!-- controller return 的值預設讀取的目錄，且以.jsp結尾的檔案名稱 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+	
+	
+
+	<!-- 檔案上傳定義 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="20971520" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="resolveLazily" value="true" />
+        <property name="maxInMemorySize" value="1048576" />
+	</bean>
+	
+	<!-- Json file定義 
+	<bean id="contentManager"  
+            class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">  
+            <property name="favorPathExtension" value="true"/>  
+            <property name="ignoreAcceptHeader" value="true" />  
+            <property name="defaultContentType" value="text/html" />  
+            <property name="useJaf" value="false"/>  
+            <property name="mediaTypes">  
+                <map>  
+                    <entry key="json" value="application/json" />  
+                    <entry key="html" value="text/html" />  
+                    <entry key="xml" value="application/xml" />  
+                </map>  
+            </property>  
+    </bean>-->
+	<!-- JPA資料存取控制 -->
+	<beans profile="default,spring-data-jpa">
+		<!-- JPA EntityManagerFactory -->
+		<bean id="entityManagerFactory"
+			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+			p:dataSource-ref="dataSource">
+			<property name="jpaVendorAdapter">
+				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
+					p:database="${jpa.database}" p:showSql="${jpa.showSql}" />
+			</property>
+			<property name="jpaProperties">
+				<props>
+					<!-- <prop key="hibernate.jdbc.fetch_size">50</prop> -->
+					<prop key="hibernate.jdbc.batch_size">50</prop>
+					<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+					<prop key="hibernate.connection.charSet">UTF-8</prop>
+					<prop key="hibernate.hbm2ddl.auto">none</prop>
+					<prop key="javax.persistence.validation.mode">none</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.format_sql">true</prop>
+					<prop key="hibernate.use_sql_comments">true</prop>
+					<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				</props>
+			</property>
+			<property name="packagesToScan" value="tw.com.ezlifetech.ezReco.model" />
+		</bean>
+		<!--交易控制-->
+		<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+			p:entityManagerFactory-ref="entityManagerFactory" />
+		<!-- Post-processor to perform exception translation on @Repository classes 
+			(from native exceptions such as JPA PersistenceExceptions to Spring's DataAccessException 
+			hierarchy). -->
+		<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	</beans>
+
+	<beans profile="default">
+		<!-- 自動載入JPA資料存取三要用到的元件@Transactional.  @PersistenceContext.  @Repository. -->
+		<context:component-scan base-package="tw.com.ezlifetech.ezReco.respository.impl" />
+		<context:component-scan base-package="tw.com.ezlifetech.ezReco.controller" />
+	</beans>
+	
+</beans>

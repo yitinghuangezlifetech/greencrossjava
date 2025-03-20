@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+	<tlib-version>5.0</tlib-version>
+	<short-name>pi</short-name>
+
+	<!-- 自定義標簽的描述信息 -->
+	<tag>
+		<!-- 標簽名 -->
+		<name>formatDate</name>
+		<!-- 對應的標簽處理類全限定名 -->
+		<tag-class>com.tradevan.web.tag.FormatDateTag</tag-class>
+		<!-- 標簽主體的類型 -->
+		<body-content>empty</body-content>
+		<!-- 屬性的描述信息 -->
+		<attribute>
+			<!-- 屬性名 -->
+			<name>value</name>
+			<!-- 該屬性是否为必要的 -->
+			<required>true</required>
+			<!-- 屬性值是否可以在JSP運行時期動態產生 -->
+			<rtexprvalue>true</rtexprvalue>
+			<!-- 屬性的數據類型 -->
+			<type>java.lang.Object</type>			
+		</attribute>
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+	</tag>
+	<tag>
+		<name>formatNumber</name>
+		<tag-class>com.tradevan.web.tag.FormatNumberTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>			
+		</attribute>
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>formatJsonCode</name>
+		<tag-class>com.tradevan.web.tag.JsonCodeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>tagType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>selectType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>defaultValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>notNull</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>isShow</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+	</tag>
+	<tag>
+		<name>compare</name>
+		<tag-class>com.tradevan.web.tag.CompareTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>pattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>			
+		</attribute>
+		<attribute>
+			<name>oldValue</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>			
+		</attribute>
+		<attribute>
+			<name>newValue</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Object</type>			
+		</attribute>
+	</tag>
+</taglib>

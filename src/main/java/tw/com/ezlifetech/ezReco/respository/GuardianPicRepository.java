@@ -1,0 +1,10 @@
+package tw.com.ezlifetech.ezReco.respository;
+
+import tw.com.ezlifetech.ezReco.common.respository.GenericRepository;
+import tw.com.ezlifetech.ezReco.model.GuardianPic;
+
+public interface GuardianPicRepository extends GenericRepository<GuardianPic, String>{
+
+	Long getNextProductPicSeq();
+
+}

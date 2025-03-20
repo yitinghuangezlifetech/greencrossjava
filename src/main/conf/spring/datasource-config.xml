@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Application context definition for Datasource. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/jdbc
+         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+         http://www.springframework.org/schema/jee
+         http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<!-- ========================= DATASOURCE DEFINITION ========================= -->
+
+	<!-- bonecp連線池 -->  
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">  
+        <property name="driverClass" value="org.postgresql.Driver" />  
+		<!-- property name="jdbcUrl" value="jdbc:postgresql://35.234.0.68:5432/arservicedb" />
+		<property name="username" value="postgres" />  
+		<property name="password" value="ezreco2019" />
+		<property name="jdbcUrl" value="jdbc:postgresql://34.80.145.129:5432/tgcc" /-->
+		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/tgcc" />
+		<property name="username" value="dbmgr" />  
+		<property name="password" value="1qaz@WSX" />
+        
+       <!-- 檢查資料庫連接池中空閒連接的間隔時間，單位是分，預設值：240，如果要取消則設置為0 -->
+        <property name="idleConnectionTestPeriod" value="60" />  
+        <!-- 連接池中未使用的連結最大存活時間，單位是分，預設值：60，如果要永遠存活設置為0 -->
+        <property name="idleMaxAge" value="240" />
+        <!-- 設置分區個數。這個參數默認為1，建議3-4（根據特定應用程式而定）。 -->
+        <property name="partitionCount" value="3" />
+        <!-- 設置每個分區含有connection最大個數。這個參數默認為2。如果小於2，BoneCP將設置為50。 比如：partitionCount設置為3，maxConnectionPerPartition設置為5，你就會擁有總共15個connection。 -->
+        <property name="maxConnectionsPerPartition" value="30" /> 
+        <!-- 設置每個分區含有connection最小個數。 -->
+        <property name="minConnectionsPerPartition" value="10" />
+        <!-- 設置分區中的connection增長數量 每次去拿資料庫連接的時候一次性要拿幾個 默認為2 -->
+        <property name="acquireIncrement" value="5" />
+        <!-- 設置statement緩存個數。這個參數默認為0。 -->
+        <property name="statementsCacheSize" value="100" />
+        <!-- 每個分區釋放連結助理進程的數量，預設值：3，除非你的一個資料庫連接的時間內做了很多工作，不然過多的助理進程會影響你的性能 -->
+        <property name="releaseHelperThreads" value="3" />
+    </bean>
+</beans>

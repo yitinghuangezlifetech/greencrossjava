@@ -1,0 +1,71 @@
+.input {
+	font-size: 16px;
+	border-color: #cccccc;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 9px;
+	padding: 3px;
+}
+
+.input:focus {
+	outline: none;
+}
+
+.k-editor .k-i-Insert-video {
+	background: 50% 50% no-repeat url(../../img/youtube1616.png);
+}
+
+.dropZoneElement {
+	position: relative;
+	display: inline-block;
+	background-color: #f8f8f8;
+	border: 1px solid #c7c7c7;
+	width: 230px;
+	height: 110px;
+	text-align: center;
+}
+
+.textWrapper {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+	font-size: 24px;
+	line-height: 1.2em;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #000;
+}
+
+.dropImageHereText {
+	color: #c7c7c7;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.product {
+	float: left;
+	position: relative;
+	margin: 0 10px 10px 0;
+	padding: 0;
+
+}
+
+.product img {
+	height: 110px;
+}
+
+.product .deleteImg{
+	position : absolute;
+	top : 0px;
+	right : 0px;
+	width : 25px;
+	height : 25px;
+}
+
+.wrapper:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}

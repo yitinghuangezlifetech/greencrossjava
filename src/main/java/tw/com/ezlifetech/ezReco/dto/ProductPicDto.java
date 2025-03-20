@@ -1,0 +1,118 @@
+package tw.com.ezlifetech.ezReco.dto;
+
+import java.util.Date;
+
+import org.springframework.beans.BeanUtils;
+
+import tw.com.ezlifetech.ezReco.common.dto.CommonDto;
+import tw.com.ezlifetech.ezReco.model.ProductPic;
+
+public class ProductPicDto extends CommonDto{
+	public static final String dtoName = "productPicDto";
+	
+	private String id;
+	private String proNo;
+	private String picPatch;
+	private String isMainPic;
+	private String picIndex;
+	private String contentType;
+	private String createUser;
+	private Date createTime;
+	private String updateUser;
+	private Date updateTime;
+	private String systemMemo;
+	private String tmpId;
+	private Boolean first;
+	
+	public ProductPicDto() {
+		
+	}
+	
+	public ProductPicDto(ProductPic productPict) {
+		BeanUtils.copyProperties(productPict, this);
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getProNo() {
+		return proNo;
+	}
+	public void setProNo(String proNo) {
+		this.proNo = proNo;
+	}
+	public String getPicPatch() {
+		return picPatch;
+	}
+	public void setPicPatch(String picPatch) {
+		this.picPatch = picPatch;
+	}
+	public String getIsMainPic() {
+		return isMainPic;
+	}
+	public void setIsMainPic(String isMainPic) {
+		this.isMainPic = isMainPic;
+	}
+	public String getPicIndex() {
+		return picIndex;
+	}
+	public void setPicIndex(String picIndex) {
+		this.picIndex = picIndex;
+	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getSystemMemo() {
+		return systemMemo;
+	}
+	public void setSystemMemo(String systemMemo) {
+		this.systemMemo = systemMemo;
+	}
+	public String getTmpId() {
+		return tmpId;
+	}
+	public void setTmpId(String tmpId) {
+		this.tmpId = tmpId;
+	}
+	public String getContentType() {
+		return contentType;
+	}
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public Boolean getFirst() {
+		return first;
+	}
+
+	public void setFirst(Boolean first) {
+		this.first = first;
+	}
+	
+	
+	
+}

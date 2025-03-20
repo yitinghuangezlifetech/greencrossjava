@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/pages/decorators">
+	<excludes>
+		<pattern>*.html*</pattern>
+		<pattern>/admin/login*</pattern>
+		<pattern>*show*</pattern>
+		<pattern>*dialog*</pattern>
+		<pattern>*preview*</pattern>
+		<pattern>/uploadFiles/*</pattern>
+	</excludes>
+	
+	<decorator name="main" page="mainLayout.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator>
+	
+	
+	
+	<decorator name="home" page="homeLayout.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	
+</decorators>
