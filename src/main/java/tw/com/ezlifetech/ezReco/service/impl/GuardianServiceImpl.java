@@ -1,8 +1,11 @@
 package tw.com.ezlifetech.ezReco.service.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -275,19 +278,23 @@ public class GuardianServiceImpl implements GuardianService{
 		File picFile = null;
 		GuardianPic pic = guardianPicRespository.getEntityById(value);
 		if(pic!=null) {
-			picFile = new File (filePath,pic.getPicPatch());
-			response.setContentType(pic.getContentType());
+			String picPatch = pic.getPicPatch().replace("\\", "/");
+	        picFile = Paths.get(filePath, picPatch).toFile();
+	        response.setContentType(pic.getContentType());
 		}else {
-			 URL fileUrl = getClass().getResource("/shopping-bag.png");
-			 picFile = new File(fileUrl.getFile());
-			 response.setContentType("image/png");
+			try (InputStream is = getClass().getResourceAsStream("/shopping-bag.png")) {
+	            if (is == null) {
+	                throw new FileNotFoundException("shopping-bag.png資源不存在");
+	            }
+	            response.setContentType("image/png");
+	            response.setContentLength(is.available());
+	            FileCopyUtils.copy(is, response.getOutputStream());
+	            return;
+	        }
 		}
-			
-		
 		
 		response.setContentLength((int)picFile.length());
 		FileCopyUtils.copy(Files.readAllBytes(picFile.toPath()), response.getOutputStream());
-		
 		
 	}
 	

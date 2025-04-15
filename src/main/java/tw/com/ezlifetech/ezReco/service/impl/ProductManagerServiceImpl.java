@@ -378,7 +378,6 @@ public class ProductManagerServiceImpl  implements ProductManagerService{
 	public void getProductPic(HttpServletResponse response, String value) throws Exception {
 	    
 	    String filePath = ConfigUtil.getValue("uploadpath");
-
 	    File picFile = null;
 	    ProductPic pic = productPicRespository.getEntityById(value);
 	    if(pic != null) {
