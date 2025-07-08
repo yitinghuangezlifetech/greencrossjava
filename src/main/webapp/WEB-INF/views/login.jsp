@@ -30,7 +30,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/js/jQuery/jquery-3.3.1.min.js' />"></script>
    	<script type="text/javascript" src="<c:url value='/js/popper/umd/popper.min.js' />?${sessionScope.randomId}"></script>
 	<script type="text/javascript" src="<c:url value='/js/bootstrap/bootstrap.min.js' />?${sessionScope.randomId}"></script>
     <script type="text/javascript" src="<c:url value='/js/jquery-cookie/jquery.cookie.js' />?${sessionScope.randomId}"></script>
